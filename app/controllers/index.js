@@ -1,0 +1,1 @@
+exports.boards = require('./boards');

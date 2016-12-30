@@ -1,0 +1,116 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Business Intelligence Toolkit')
+    meta(name='author', content='bitelio')
+    title bitelio
+    // Bootstrap Core CSS
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+    // Custom CSS
+    link(href='css/bitelio.css', rel='stylesheet')
+    // Custom Fonts
+    link(href='https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Raleway:300,600', rel='stylesheet', type='text/css')
+    // Google Analytics
+    //script(src='js/analytics.js')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body#page-top(data-spy='scroll', data-target='.navbar-fixed-top')
+    // Navigation
+    nav.navbar.navbar-custom.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
+            i.fa.fa-bars
+          a.navbar-brand.page-scroll(href='#page-top')
+            | bitelio
+        // Collect the nav links, forms, and other content for toggling
+        .collapse.navbar-collapse.navbar-right.navbar-main-collapse
+          ul.nav.navbar-nav
+            // Hidden li included to remove active class from about link when scrolled up past about section
+            li.hidden
+              a(href='#page-top')
+            li
+              a.page-scroll(href='#about') About
+            li
+              a.page-scroll(href='#contact') Contact
+            li
+              a.page-scroll(href='/login') Login
+        // /.navbar-collapse
+      // /.container
+    // Intro Header
+    header.intro
+      .intro-body
+        .container
+          .row
+            .col-md-8.col-md-offset-2
+              h1.brand-heading
+                | BUSINESS INTELLIGENCE
+                br
+                span.light the way it should be
+              p.intro-text
+                | Get on top of your data and boost your business through informed decision-making
+              a.btn.btn-circle.page-scroll(href='#about')
+                i.fa.fa-angle-double-down.animated
+    // About Section
+    section#about.container.text-center
+      h3 What we offer
+      .row
+        .col-sm-4
+          span.fa.fa-line-chart.fa-5x.icon
+          h5 KPI definition
+          p Key Performance Indicators are the heart and soul of every business. Choose yours wisely.
+        .col-sm-4
+          span.fa.fa-tachometer.fa-5x.icon
+          h5 Customized dashboards
+          p Choose among many different possibilities. Get great insights in one look.
+        .col-sm-4
+          span.fa.fa-balance-scale.fa-5x.icon
+          h5 Workload balance
+          p Avoid disruptions. Improve delivery times. Never miss a deadline again.
+      // <h3>What we offer</h3>
+      .row
+        .col-sm-4
+          span.fa.fa-bullhorn.fa-5x.icon
+          h5 Real-time notifications
+          p Stay in the loop. Receive automatic email alerts.
+        .col-sm-4
+          span.fa.fa-files-o.fa-5x.icon
+          h5 Automated reports
+          p Let computers do the hard work for you. Focus on what's important.
+        .col-sm-4
+          span.fa.fa-group.fa-5x.icon
+          h5 Personalized counselling
+          p Receive in-house assistance from experienced managers. Lean management, TOC and more.
+    // Contact Section
+    section#contact.container.text-center
+      .row
+        .col-lg-8.col-lg-offset-2
+          h2 Contact us
+          p
+            | Have any question or comment?
+            br
+            | Feel free to email us. We'll get back to you in no time at all.
+          .btn.btn-default
+            a(href='mailto:info@bitelio.com') info@bitelio.com
+    // Footer
+    footer
+      .container-fluid.text-center
+        p
+          | Copyright © bitelio 2016 &nbsp &nbsp - &nbsp &nbsp
+          a(href='bitelio.com/de') bitelio auf Deutsch
+    // jQuery
+    script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
+    // Bootstrap Core JavaScript
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+    // Plugin JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js')
+    // Custom Theme JavaScript
+    script(src='js/bitelio.js')
+

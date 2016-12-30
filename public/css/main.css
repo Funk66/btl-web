@@ -1,0 +1,40 @@
+body {
+  background-color: #eee;
+  background-image: url(/img/background.png);
+}
+
+@font-face { font-family: bitelio; src: url('../fonts/bitelio.otf'); }
+
+.bitelio {
+  font-family: bitelio;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.flex {
+  height: '100%';
+}
+
+.center {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.panel {
+  box-shadow: 2px 3px 6px #bbb;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    margin-top: 100px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
+  }
+}
