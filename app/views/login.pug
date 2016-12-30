@@ -1,30 +1,19 @@
-doctype html
-html(lang='en')
-  html
-    head
-      meta(charset='utf-8')
-      meta(http-equiv='X-UA-Compatible', content='IE=edge')
-      meta(name='viewport', content='width=device-width, initial-scale=1')
-      meta(name='description', content='Business Intelligence')
-      meta(name='author', content='bitelio')
-      title bitelio
-      link(rel='stylesheet', href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
-      link(rel='stylesheet', href='https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
-      link(href='css/main.css', rel='stylesheet')
-    body
-      .container.center
-        .col-xs-12.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
-          .panel.panel-default
-            .panel-heading
-              .bitelio bitelio
+extends layout.pug
 
-            .panel-body
-              if message.length > 0
-                .alert.alert-danger= message
+block content
+  .container.center
+    .col-xs-12.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
+      .panel.panel-default.login
+        .panel-heading
+          .bitelio bitelio
 
-              form(action='/login', method='post')
-                .form-group
-                  input.form-control(type='text', name='username', placeholder='Username')
-                .form-group
-                  input.form-control(type='password', name='password', placeholder='Password')
-                button.btn.btn-primary.pull-right(type='submit') Log in
+        .panel-body
+          if message.length > 0
+            .alert.alert-danger= message
+
+          form(action='/login', method='post')
+            .form-group
+              input.form-control(type='text', name='username', placeholder='Username')
+            .form-group
+              input.form-control(type='password', name='password', placeholder='Password')
+            button.btn.btn-primary.pull-right(type='submit') Log in

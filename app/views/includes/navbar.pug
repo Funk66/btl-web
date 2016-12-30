@@ -1,0 +1,28 @@
+nav.navbar.navbar-inverse.navbar-static-top
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false")
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand.bitelio(href="/") bitelio
+
+    - var pages = ['Dashboard']
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        each page in pages
+          li(class=page.toLowerCase()===active?'active':undefined)
+            a(href='/' + page.toLowerCase())= page
+
+      ul.nav.navbar-nav.navbar-right
+        li.dropdown
+          a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= user.username
+          ul.dropdown-menu
+            li: a(href="/settings")
+              i.fa.fa-gear.fa-fw
+              | Settings
+            li.divider(role="separator")
+            li: a(href="/logout")
+              i.fa.fa-sign-out.fa-fw
+              | Log out
