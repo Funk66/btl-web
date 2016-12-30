@@ -9,11 +9,10 @@ block content
 
         .panel-body
           h4 Change password
-          form(action='/login', method='post')
+          form(action='/login' method='post')
             .form-group
-              input.form-control(type='text', placeholder='New password')
+              input.form-control(type='password' name='password' placeholder='New password')
             .form-group
-              input.form-control(type='password', name='password', placeholder='Repeat password')
+              input.form-control(type='password' name='confirmation' placeholder='Repeat password')
             button.btn.btn-primary.pull-right(type='submit') Save
-
 
