@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
 };
 
 userSchema.methods.validPassword = function(password) {
@@ -15,17 +15,9 @@ userSchema.methods.validPassword = function(password) {
 };
 
 userSchema.pre('save', function(next) {
-  var user = this;
-  var saltFactor = 5;
-  if (!user.isModified('password')) return next();
-  bcrypt.genSalt(saltFactor, function(err, salt) {
-    if (err) return next(err);
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
-      if (err) return next(err);
-      user.password = hash;
-      next();
-    });
-  });
+  if (this.isModified('password'))
+    this.password = this.generateHash(this.password);
+  next();
 });
 
 module.exports = mongoose.model('User', userSchema);
