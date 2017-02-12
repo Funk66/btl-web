@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 
-var environment = require('./environment');
 var credentials = require('./credentials');
 
 var sessionData = {
@@ -23,9 +22,10 @@ var sessionData = {
 
 var app = express();
 
-if (environment === 'development') {
+app.set('env', process.env.NODE_ENV || 'production');
+if (app.get('env') === 'development') {
   app.use(morgan('dev'));
-} else if (environment === 'production') {
+} else if (app.get('env') === 'production') {
   app.use(morgan('common'));
   app.use(compress());
 }
@@ -39,7 +39,7 @@ app.set('view engine', 'pug');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use('/', require('../app/routes'));
+app.use('/', require('routes'));
 app.use(express.static('./public'));
 
 // ERROR HANDLER
@@ -57,4 +57,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-

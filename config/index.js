@@ -1,3 +1,4 @@
-require('./mongoose');
+exports.credentials = require('./credentials');
+exports.db = require('./mongoose');
 require('./passport');
-module.exports = require('./express');
+exports.app = require('./express');

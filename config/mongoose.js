@@ -1,11 +1,9 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongo/bitelio');
+mongoose.connect('mongodb://mongo/bitelio', function(err) {
+  if (err) throw err;
+});
 var db = mongoose.connection;
-//db.on('error'), console.error.bind(console, 'Database connection error')
-//db.once('open', function() {
-  //console.log("Connected to mongo")
-//})
-require('../app/models');
+require('models');
 
 module.exports = db;

@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
-var app = require('../config');
-var debug = require('debug')('bitelio:server');
+var app = require('app');
+var debug = require('debug')('btl-web:server');
 var http = require('http');
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
 var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
@@ -13,25 +15,14 @@ server.on('listening', onListening);
 // Normalize a port into a number, string, or false.
 function normalizePort(val) {
   var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
+  if (isNaN(port)) return val;
+  if (port >= 0) return port;
   return false;
 }
 
 // Event listener for HTTP server "error" event.
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+  if (error.syscall !== 'listen') throw error;
 
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
