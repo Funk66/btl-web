@@ -1,6 +1,7 @@
 body {
   background-color: #eee;
   background-image: url(/img/background.png);
+  font-family: sans-serif;
 }
 
 @font-face { font-family: bitelio; src: url('../fonts/bitelio.otf'); }

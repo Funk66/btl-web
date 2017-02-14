@@ -46,9 +46,9 @@ module.exports = function(database) {
 
     // ERROR HANDLER
     app.use(function(req, res, next) {
-      var err = new Error('Not Found');
+      var err = new Error('Page not found');
       err.status = 404;
-      res.render('404');
+      next(err)
     });
 
     app.use(function(err, req, res, next) {
