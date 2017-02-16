@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
-var debug = require('debug')('btl-web:server')
+var debug = require('debug')('btl-web:server');
 require('models');
+
+mongoose.Promise = global.Promise;
 
 module.exports = function() {
   return new Promise(function(resolve, reject) {
@@ -10,4 +12,4 @@ module.exports = function() {
       resolve(mongoose.connection);
     });
   });
-}
+};
