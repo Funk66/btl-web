@@ -16,13 +16,17 @@ module.exports.new = function(req, res, next) {
         req.flash('danger', `User ${username} already exists`);
         next();
       } else {
-        req.flash('success', "We've sent you an activation email");
-        utils.emails.activation(username, user.token, req.headers.host);
-        next();
+        var link = `http://${req.headers.host}/signup/${user.token}`;
+        utils.emails.activation(username, link, function(err) {
+          if (err) return next(err);
+          req.flash('success', "We've sent you an activation email");
+          next();
+          });
       }
     } else {
       // Check if email is among Kanban accounts
       controllers.users.exists(username, function(err, exists) {
+        exists = true;
         if (err) return next(err);
         if (!exists) {
           req.flash('danger', `${username} is not a Kanban account`);
@@ -37,13 +41,16 @@ module.exports.new = function(req, res, next) {
           });
           user.save(function(err) {
             if (err) return next(err);
-            utils.emails.activation(username, token, req.headers.host);
-            req.flash('success', "We've sent an email with the activation code");
-            next();
+            var link = `http://${req.headers.host}/signup/${token}`;
+            utils.emails.activation(username, link, function(err) {
+              if (err) return next(err);
+              req.flash('success', "We've sent you an activation email");
+              next();
+            });
           });
-        };
+        }
       });
-    };
+    }
   });
 };
 
@@ -64,4 +71,4 @@ module.exports.activate = function(req, res, next) {
       next();
     }
   });
-}
+};
