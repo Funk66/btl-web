@@ -11,53 +11,50 @@ var MongoStore = require('connect-mongo')(session);
 var credentials = require('./credentials');
 
 module.exports = function(database) {
-  return new Promise(function(resolve, reject) {
-    var sessionData = {
-      secret: credentials.express.sessionSecret,
-      resave: false,
-      saveUninitialized: true,
-      store: new MongoStore({
-        mongooseConnection: database
-      })
-    };
+  var sessionData = {
+    secret: credentials.express.sessionSecret,
+    resave: false,
+    saveUninitialized: true
+  };
 
-    var app = express();
+  if (database) sessionData.store = new MongoStore({mongooseConnection: database});
 
-    app.set('env', process.env.NODE_ENV || 'production');
-    if (app.get('env') === 'development') {
-      app.use(morgan('dev'));
-    } else if (app.get('env') === 'production') {
-      app.use(morgan('common'));
-      app.use(compress());
-      sessionData.secure = true;
-    }
+  var app = express();
 
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(bodyParser.json());
-    app.use(methodOverride());
-    app.use(session(sessionData));
-    app.set('views', './app/views');
-    app.set('view engine', 'pug');
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(flash());
-    app.use('/', require('routes'));
-    app.use(express.static('./public'));
+  app.set('env', process.env.NODE_ENV || 'production');
+  if (app.get('env') === 'development') {
+    app.use(morgan('dev'));
+  } else if (app.get('env') === 'production') {
+    app.use(morgan('common'));
+    app.use(compress());
+    sessionData.secure = true;
+  }
 
-    // ERROR HANDLER
-    app.use(function(req, res, next) {
-      var err = new Error('Page not found');
-      err.status = 404;
-      next(err)
-    });
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json());
+  app.use(methodOverride());
+  app.use(session(sessionData));
+  app.set('views', './app/views');
+  app.set('view engine', 'pug');
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
+  app.use('/', require('routes'));
+  app.use(express.static('./public'));
 
-    app.use(function(err, req, res, next) {
-      res.locals.message = err.message;
-      res.locals.error = req.app.get('env') === 'development' ? err : {};
-      res.status(err.status || 500);
-      res.render('error');
-    });
-
-    resolve(app);
+  // ERROR HANDLER
+  app.use(function(req, res, next) {
+    var err = new Error('Page not found');
+    err.status = 404;
+    next(err);
   });
-}
+
+  app.use(function(err, req, res, next) {
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    res.status(err.status || 500);
+    res.render('error');
+  });
+
+  return app;
+};

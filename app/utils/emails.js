@@ -45,7 +45,8 @@ function send(template, options, done) {
       text: result.text,
       html: result.html
     };
-    client.sendMail(email);
+    if (process.env.NODE_ENV == 'test') debug(options.contents.link);
+    else client.sendMail(email);
     debug('Sent email to ' + options.address);
     done();
   });

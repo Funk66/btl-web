@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "node_modules/.bin/mocha"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -26,5 +27,11 @@
     "pug": "^2.0.0-beta9",
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "supertest": "^3.0.0"
   }
 }

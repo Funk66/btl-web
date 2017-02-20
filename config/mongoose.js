@@ -4,10 +4,12 @@ require('models');
 
 mongoose.Promise = global.Promise;
 
+var url = 'mongodb://mongo/' + (process.env.NODE_ENV == 'test' ? 'test' : 'bitelio');
+
 module.exports = function() {
   return new Promise(function(resolve, reject) {
-  mongoose.connect('mongodb://mongo/bitelio', function(err) {
-      if (err) reject(err);
+  mongoose.connect(url, function(err) {
+      if (err) return reject(err);
       debug('Connected to MongoDB');
       resolve(mongoose.connection);
     });
