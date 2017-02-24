@@ -1,1 +1,1 @@
-module.exports.user = require('./user');
+module.exports.member = require('./member');

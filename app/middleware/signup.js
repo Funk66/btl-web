@@ -9,7 +9,7 @@ module.exports.new = function(req, res, next) {
   var password = req.body.password;
 
   // Check if user is already signed up
-  controllers.users.find(username, function(err, user) {
+  controllers.bitelio.members.find(username, function(err, user) {
     if (err) return next(err);
     if (user) {
       if (user.active) {
@@ -25,21 +25,20 @@ module.exports.new = function(req, res, next) {
       }
     } else {
       // Check if email is among Kanban accounts
-      controllers.users.exists(username, function(err, exists) {
-        exists = true;
+      controllers.kanban.users.find(username, function(err, user) {
         if (err) return next(err);
-        if (!exists) {
+        if (!user) {
           req.flash('danger', `${username} is not a Kanban account`);
           next();
         } else {
-          // Create new user
+          // Create new member
           var token = crypto.randomBytes(20).toString('hex');
-          var user = new models.bitelio.user({
+          var member = new models.bitelio.member({
             username: username.toLowerCase(),
             password: password,
             token: token
           });
-          user.save(function(err) {
+          member.save(function(err) {
             if (err) return next(err);
             var link = `http://${req.headers.host}/signup/${token}`;
             utils.emails.activation(username, link, function(err) {
@@ -56,12 +55,12 @@ module.exports.new = function(req, res, next) {
 
 module.exports.activate = function(req, res, next) {
   var token = req.params.token;
-  controllers.users.token(token, function(err, user) {
+  controllers.bitelio.members.token(token, function(err, member) {
     if (err) return next(err);
-    if (user) {
-      user.active = true;
-      user.token = null;
-      user.save(function(err) {
+    if (member) {
+      member.active = true;
+      member.token = null;
+      member.save(function(err) {
         if (err) return next(err);
         req.flash('success', 'Your account is now active');
         next();

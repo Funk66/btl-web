@@ -1,2 +1,2 @@
-module.exports.bitelio = require('./bitelio');
-module.exports.kanban = require('./kanban');
+exports.bitelio = require('./bitelio');
+exports.kanban = require('./kanban');

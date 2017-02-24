@@ -8,9 +8,16 @@ nav.navbar.navbar-inverse.navbar-static-top
         span.icon-bar
       a.navbar-brand.bitelio(href="/") bitelio
 
-    - var pages = ['Dashboard']
+    - var pages = ['Dashboard', 'Delivery']
     .collapse.navbar-collapse
       ul.nav.navbar-nav
+        if board
+          li.dropdown
+            a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= board.Title
+            ul.dropdown-menu
+              each board in boards
+                li: a(href="/change/"+board.Id)= board.Title
+
         each page in pages
           li(class=page.toLowerCase()===active?'active':undefined)
             a(href='/' + page.toLowerCase())= page

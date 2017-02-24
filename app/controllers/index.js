@@ -1,2 +1,2 @@
-exports.boards = require('./boards');
-exports.users = require('./users');
+exports.bitelio = require('./bitelio');
+exports.kanban = require('./kanban');
