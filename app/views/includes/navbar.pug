@@ -8,15 +8,24 @@ nav.navbar.navbar-inverse.navbar-static-top
         span.icon-bar
       a.navbar-brand.bitelio(href="/") bitelio
 
-    - var pages = ['Dashboard', 'Delivery']
+    - var pages = ['Dashboard']
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        if board
+        i#boardId(hidden)= user.board
+        if Object.keys(boards).length > 1
           li.dropdown
-            a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= board.Title
+            a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+              b= boards[user.board]
+                span= ' '
+                span.caret
             ul.dropdown-menu
-              each board in boards
-                li: a(href="/change/"+board.Id)= board.Title
+              each boardTitle, boardId in boards
+                if boardId != user.board
+                  li: a(href="/board/"+boardId)= boardTitle
+        else
+          li
+            a
+              b= boards[user.board]
 
         each page in pages
           li(class=page.toLowerCase()===active?'active':undefined)

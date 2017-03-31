@@ -7,6 +7,7 @@ var memberSchema = new mongoose.Schema({
   active: {type: Boolean, default: false},
   token: String,
   validity: Date,
+  board: Number,
   lastseen: Date
 });
 

@@ -9,7 +9,21 @@ exports.find = function(username, done) {
     user.Boards = users.map(user => user.Board);
     delete user.Board;
     delete user.BoardId;
-    console.log(user);
     done(null, user);
   });
+};
+
+exports.boards = function(username, done) {
+  models.kanban.user
+    .find({UserName: username}, 'BoardId')
+    //.populate('Board')
+    .populate({path: 'Board', select: 'Board Title'})
+    .exec(function(err, users) {
+      if (err) return done(err);
+      boards = {};
+      users.forEach(function(user) {
+        boards[user.BoardId] = user.Board.Title;
+      });
+      done(null, boards);
+    });
 };
